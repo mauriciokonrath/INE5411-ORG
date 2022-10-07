@@ -1,9 +1,9 @@
 #text segment declarar matriz como uma word  
-#reservar endereÁo para matriz trasnposta e onde colocar  
-#vai multiplicando atÈ o endereÁo de mamÛria  
+#reservar endere√ßo para matriz trasnposta e onde colocar  
+#vai multiplicando at√© o endere√ßo de mam√≥ria  
 .data 
  save1:  .word 1, 2, 0, 1, -1, -3, 0, 1, 3, 6, 1, 3, 2, 4, 0, 3 
- espaÁoTransposta: .word 1
+ espa√ßoTransposta: .word 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
  fout: .asciiz "transposta.dat"
 
  
@@ -11,12 +11,12 @@
 
 
  main:   
- la $s0, save1 #endereÁo da matriz inteira que È a original 
- la $s1, espaÁoTransposta #endereÁo da matriz que vai ser o resultado 
+ la $s0, save1 #endere√ßo da matriz inteira que √© a original 
+ la $s1, espa√ßoTransposta #endere√ßo da matriz que vai ser o resultado 
  li $s2, 0   
  li $s3, 0 
   
-#valores v„o ser deslocando atÈ chegar ao endereÁo correto 
+#valores v√£o ser deslocando at√© chegar ao endere√ßo correto 
  LOOP1: 
  sll $t0, $s2, 2  
  sll $t1, $s3, 2  
@@ -47,21 +47,20 @@
  ##### Abrir um arquivo para escrita  #####
 	li $v0, 13 		# Comando para abrir novo arquivo
 	la $a0, fout 		# Carrega nome do arquivo a ser aberto 
-	li $a1, 1 		# Aberto para escrita (flags s„o 0: read, 1: write)
+	li $a1, 1 		# Aberto para escrita (flags s√£o 0: read, 1: write)
 	li $a2, 0 		# Modo ignorado (neste caso) 
-	syscall 		# Abre arquivo (descritor do arquivo È colocado em $v0)
+	syscall 		# Abre arquivo (descritor do arquivo √© colocado em $v0)
 	move $s7, $v0 		# Salva o descritor do arquivo para uso no fechamento, por exemplo
 	
 ##### Escrever no arquivo aberto #####
 	li $v0, 15 			# Comando para escrever no arquivo 
-	move $a0, $s7 			# Descritor do arquivo È passado
-	la $a1, espaÁoTransposta        # EndereÁo do buffer do qual ser· copiado para o arquivo 
+	move $a0, $s7 			# Descritor do arquivo √© passado
+	la $a1, espa√ßoTransposta        # Endere√ßo do buffer do qual ser√° copiado para o arquivo 
 	li $a2, 64			# Tamanho do buffer (hardcoded)
 	syscall 			# Escreve no arquivo
 	
-##### Fechar o arquivo apÛs escrever #####
+##### Fechar o arquivo ap√≥s escrever #####
 	li $v0, 16 		# Comando para fechamento do arquivo
-	move $a0, $s7 		# Descritor do arquivo È passado
-	syscall 		# Arquivo È fechado pelo sistema operacional
+	move $a0, $s7 		# Descritor do arquivo √© passado
+	syscall 		# Arquivo √© fechado pelo sistema operacional
 	
- 
