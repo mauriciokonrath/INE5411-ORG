@@ -1,9 +1,9 @@
 #text segment declarar matriz como uma word  
-#reservar endereço para matriz trasnposta e onde colocar  
-#vai multiplicando até o endereço de mamória  
+#reservar endereÃ§o para matriz trasnposta e onde colocar  
+#vai multiplicando atÃ© o endereÃ§o de mamÃ³ria  
 .data 
  save1:  .word 1, 2, 0, 1, -1, -3, 0, 1, 3, 6, 1, 3, 2, 4, 0, 3 
- espaçoTransposta: .word 1
+ espaÃ§oTransposta: .word 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
 
 
  
@@ -11,12 +11,12 @@
 
 
  main:   
- la $s0, save1 #endereço da matriz inteira que é a original 
- la $s1, espaçoTransposta #endereço da matriz que vai ser o resultado 
+ la $s0, save1 #endereÃ§o da matriz inteira que Ã© a original 
+ la $s1, espaÃ§oTransposta #endereÃ§o da matriz que vai ser o resultado 
  li $s2, 0   
  li $s3, 0 
   
-#valores vão ser deslocando até chegar ao endereço correto 
+#valores vÃ£o ser deslocando atÃ© chegar ao endereÃ§o correto 
  LOOP1: 
  sll $t0, $s2, 2  
  sll $t1, $s3, 2  
@@ -43,6 +43,3 @@
  j LOOP1 
   
  EXIT:
- 
-
- 
